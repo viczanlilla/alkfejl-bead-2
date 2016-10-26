@@ -54,7 +54,16 @@ class RecipeController {
   }
 
   * show(request, response) {
-    yield response.sendView('showRecipe')
+    const id = request.param('id')
+    const recipe = yield Recipe.find(id)
+    if (!recipe) {
+      response.notFound('Recipe does not exist')
+      return
+    }
+    yield recipe.related('category').load()
+    yield response.sendView('showRecipe', {
+      recipe: recipe.toJSON()
+    })
   }
 }
 

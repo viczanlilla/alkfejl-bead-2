@@ -6,9 +6,9 @@
 
     a. ZIP letöltése
 
-    b. horvathgyozo/alkfejl-recept-1 klónozása
+    b. horvathgyozo/alkfejl-recept-2 klónozása (`git clone https://github.com/horvathgyozo/alkfejl-recept-2.git`)
 
-    c. horvathgyozo/alkfejl-recept-1 forkolása és a saját repo klónozása
+    c. horvathgyozo/alkfejl-recept-2 forkolása és a saját repo klónozása
 
 2. `git config --global url."https://".insteadOf git://` (csak a géptermekben)
 3. `npm install`
@@ -19,6 +19,7 @@
 ## Express-admin adatbázis-kliens futtatása
 
 1. `node_modules\.bin\admin config/express-admin`
+
 2. Első futtatáskor a paraméterek beállítása
 
     a. `sqlite` adatbázis
@@ -27,3 +28,4 @@
 
     c. username és password beállítása
 
+3. `localhost:4444` megnyitása
