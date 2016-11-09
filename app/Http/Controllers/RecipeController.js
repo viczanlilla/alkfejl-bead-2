@@ -48,6 +48,7 @@ class RecipeController {
       return
     }
 
+    recipeData.user_id = request.currentUser.id
     yield Recipe.create(recipeData);
 
     response.redirect('/');
@@ -65,6 +66,74 @@ class RecipeController {
       recipe: recipe.toJSON()
     })
   }
+
+  * edit(request, response) {
+    const id = request.param('id')
+    const recipe = yield Recipe.find(id)
+
+    if (request.currentUser.id !== recipe.user_id) {
+      response.unauthorized('Nincs jog')
+      return
+    }
+
+    const categories = yield Category.all();
+
+    console.log(recipe.toJSON())
+
+    yield response.sendView('editRecipe', {
+      categories: categories.toJSON(),
+      recipe: recipe.toJSON(),
+    });
+  }
+
+  * doEdit(request, response) {
+    const recipeData = request.except('_csrf');
+    const rules = {
+      name: 'required',
+      ingredients: 'required',
+      instructions: 'required',
+      category_id: 'required'
+    }
+    const validation = yield Validator.validateAll(recipeData, rules);
+    if (validation.fails()) {
+      yield request
+        .withAll()
+        .andWith({ errors: validation.messages() })
+        .flash()
+
+      response.redirect('back')
+      return
+    }
+
+    const id = request.param('id')
+    const recipe = yield Recipe.find(id)
+
+    if (request.currentUser.id !== recipe.user_id) {
+      response.unauthorized()
+      return
+    }
+
+    recipe.name = recipeData.name
+    recipe.ingredients = recipeData.ingredients
+    recipe.instructions = recipeData.instructions
+    recipe.category_id = recipeData.category_id
+
+    yield recipe.save()
+
+    response.redirect('/');
+  }
+
+  * doDelete(request, response) {
+    const id = request.param('id')
+    const recipe = yield Recipe.find(id)
+    if (!recipe) {
+      response.notFound('Recipe does not exist')
+      return
+    }
+    yield recipe.delete()
+    response.redirect('/');
+  }
+
 }
 
 module.exports = RecipeController
