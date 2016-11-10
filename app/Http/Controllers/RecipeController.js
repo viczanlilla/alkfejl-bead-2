@@ -3,6 +3,7 @@
 const Database = use('Database')
 const Category = use('App/Model/Category')
 const Recipe = use('App/Model/Recipe')
+const User = use('App/Model/User')
 const Validator = use('Validator')
 
 class RecipeController {
@@ -132,6 +133,34 @@ class RecipeController {
     }
     yield recipe.delete()
     response.redirect('/');
+  }
+
+  * search (request, response) {
+    const page = Math.max(1, request.input('p'))
+    const filters = {
+      recipeName: request.input('recipeName') || '',
+      category: request.input('category') || 0,
+      createdBy: request.input('createdBy') || 0
+    }
+
+    const recipes = yield Recipe.query()
+      .where(function () {
+        if (filters.category > 0) this.where('category_id', filters.category)
+        if (filters.createdBy > 0) this.where('user_id', filters.createdBy)
+        if (filters.recipeName.length > 0) this.where('name', 'LIKE', `%${filters.recipeName}%`)
+      })
+      .with('user')
+      .paginate(page, 9)
+
+    const categories = yield Category.all()
+    const users = yield User.all()
+
+    yield response.sendView('recipeSearch', {
+      recipes: recipes.toJSON(),
+      categories: categories.toJSON(),
+      users: users.toJSON(),
+      filters
+    })
   }
 
 }

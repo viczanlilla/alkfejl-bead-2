@@ -15,6 +15,7 @@ Route.get('/recipes/:id/edit', 'RecipeController.edit').middleware('auth')
 Route.post('/recipes/:id/edit', 'RecipeController.doEdit').middleware('auth')
 Route.get('/recipes/:id/delete', 'RecipeController.doDelete').middleware('auth')
 // Route.delete('/recipes/:id', 'RecipeController.doDelete')
+Route.get('/recipes', 'RecipeController.search')
 
 Route.get('/register', 'UserController.register')
 Route.post('/register', 'UserController.doRegister')
