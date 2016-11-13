@@ -19,7 +19,7 @@
     "adonis-lucid": "^3.0.3",
     "adonis-middleware": "^1.0.7",
     "adonis-validation-provider": "^3.0.4",
-    "sqlite3": "^3.1.6",
+    "sqlite3": "https://registry.npmjs.org/sqlite3/-/sqlite3-3.1.6.tgz",
     "youch": "^1.0.1"
   },
   "autoload": {

@@ -6,7 +6,7 @@ FELADAT
 KÖVETELMÉNYEK
 - Funkcionális követelmények
 	- Vendégként szeretnék a hirdetések között szabadon böngészni.
-	- Vendégként szeretnék egy autó leírását megtekinteni.
+	- Vendégként szeretném egy autó leírását megtekinteni.
 	- Vendégként szeretnék eladó autót keresni.
 	- Vendégként szeretnék tudni regisztrálni az oldalra.
 	- Felhasználóként szeretnék tudni bejelentkezni az oldalra.
