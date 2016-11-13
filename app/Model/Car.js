@@ -7,9 +7,9 @@ class Car extends Lucid {
     return this.belongsTo('App/Model/Category')
   }
 
-  /*like () {
-    return this.belongsTo('App/Model/Like')
-  }*/
+  user () {
+    return this.belongsTo('App/Model/User')
+  }
 }
 
 module.exports = Car

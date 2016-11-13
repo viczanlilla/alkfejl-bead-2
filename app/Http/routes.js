@@ -17,8 +17,10 @@ Route.get('/editUser', 'UserController.editUser').middleware('auth')
 Route.post('/editUser', 'UserController.doEdit').middleware('auth')
 
 
-Route.get('/ads/create', 'RecipeController.create').middleware('auth')
-Route.post('/ads/create', 'RecipeController.doCreate').middleware('auth')
+Route.get('/cars/createCar', 'CarController.createCar').middleware('auth')
+Route.post('/cars/createCar', 'CarController.doCreateCar').middleware('auth')
+
+
 Route.get('/ads/:id', 'RecipeController.show')
 Route.get('/ads/:id/edit', 'RecipeController.edit').middleware('auth')
 Route.post('/ads/:id/edit', 'RecipeController.doEdit').middleware('auth')

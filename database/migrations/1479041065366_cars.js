@@ -12,7 +12,7 @@ class CarsSchema extends Schema {
       table.string('model').notNullable()
       table.integer('year').notNullable()
       table.integer('price').notNullable()
-      table.string('category').notNullable()
+      table.integer('category_id').unsigned().references('id').inTable('categories')
       table.string('condition').notNullable()
       table.string('fuel').notNullable()
       table.integer('km').notNullable()

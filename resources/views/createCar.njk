@@ -1,0 +1,122 @@
+{% extends 'layout' %}
+
+{% block content %}
+
+<h2>Új hirdetés készítése</h2>
+
+{% if old('errors') %}
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title">Hibalista</h3>
+  </div>
+  <div class="panel-body">
+    <ul>
+      {% for error in old('errors') %}
+      <li>{{ error.message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+
+<form class="form-horizontal" action="" method="post">
+
+  {{ csrfField }}
+
+  <div class="form-group">
+    <label for="brand" class="col-lg-2 control-label">Márka</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="brand" name="brand" placeholder="Pl.: BMW"
+        value="{{ old('brand') }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="model" class="col-lg-2 control-label">Modell</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="model" name="model" placeholder="Pl.: X6"
+        value="{{ old('model') }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="year" class="col-lg-2 control-label">Év</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="year" name="year" placeholder="Pl.: 2016"
+        value="{{ old('year') }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="price" class="col-lg-2 control-label">Ár</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="price" name="price" placeholder="Pl.: 30 000 000"
+        value="{{ old('price') }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="category_id" class="col-lg-2 control-label">Kategória</label>
+    <div class="col-lg-10">
+      <select class="form-control" id="category_id" name="category_id">
+        {% for category in categories %}
+        <option value="{{ category.id }}"
+          {% if category.id == old('category_id') %}
+          selected
+          {% endif %}
+        >
+          {{ category.name }}
+        </option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="condition" class="col-lg-2 control-label">Állapot</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="condition" name="condition" placeholder="Pl.: Új"
+        value="{{ old('condition') }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="fuel" class="col-lg-2 control-label">Üzemanyag</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="fuel" name="fuel" placeholder="Pl.: Benzin"
+        value="{{ old('fuel') }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="km" class="col-lg-2 control-label">Megtett km</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="km" name="km" placeholder="Pl.: 50 000"
+        value="{{ old('km') }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="enginecapacity" class="col-lg-2 control-label">Hengerűrtartalom</label>
+    <div class="col-lg-10">
+      <input type="text" class="form-control" id="enginecapacity" name="enginecapacity" placeholder="Pl.: 4395"
+        value="{{ old('enginecapacity') }}">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description" class="col-lg-2 control-label">Leírás</label>
+    <div class="col-lg-10">
+      <textarea class="form-control" rows="3" id="description" name="description"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-10 col-lg-offset-2">
+      <button type="reset" class="btn btn-default">Mégse</button>
+      <button type="submit" class="btn btn-primary">Kész!</button>
+    </div>
+  </div>
+</form>
+
+{% endblock %}

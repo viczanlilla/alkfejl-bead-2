@@ -6,39 +6,27 @@ const Car = use('App/Model/Car')
 const User = use('App/Model/User')
 const Validator = use('Validator')
 
-class RecipeController {
-  * index(request, response) {
-    // const categories = yield Database.from('categories').select('*')
-    // response.send(categories)
-    const categories = yield Category.all()
-
-    for (let category of categories) {
-      const topRecipes = yield category.recipes().limit(3).fetch()
-      category.topRecipes = topRecipes.toJSON()
-    }
-
-    yield response.sendView('main', {
-      categories: categories.toJSON()
-    }) 
-  }
-
-  * create(request, response) {
+class CarController {
+  * createCar(request, response) {
     const categories = yield Category.all();
 
-    yield response.sendView('createRecipe', {
+    yield response.sendView('createCar', {
       categories: categories.toJSON()
     });
   }
 
-  * doCreate(request, response) {
-    const recipeData = request.except('_csrf');
+  * doCreateCar(request, response) {
+    const carData = request.except('_csrf');
     const rules = {
-      name: 'required',
-      ingredients: 'required',
-      instructions: 'required',
-      category_id: 'required'
+      brand: 'required',
+      model: 'required',
+      year: 'required',
+      price: 'required',
+      category: 'required',
+      km: 'required',
+      description: 'required',
     }
-    const validation = yield Validator.validateAll(recipeData, rules);
+    const validation = yield Validator.validateAll(carData, rules);
     if (validation.fails()) {
       yield request
         .withAll()
@@ -49,8 +37,8 @@ class RecipeController {
       return
     }
 
-    recipeData.user_id = request.currentUser.id
-    yield Recipe.create(recipeData);
+    carData.car_id = request.currentUser.id
+    yield Car.create(carData);
 
     response.redirect('/');
   }
@@ -165,4 +153,4 @@ class RecipeController {
 
 }
 
-module.exports = RecipeController
+module.exports = CarController

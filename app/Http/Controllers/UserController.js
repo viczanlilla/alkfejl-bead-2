@@ -40,6 +40,7 @@ class UserController {
     user.username = registerData.username
     user.email = registerData.email
     user.password = yield Hash.make(registerData.password)
+    user.telephonenumber = registerData.telephonenumber
 
     yield user.save()
 
