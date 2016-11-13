@@ -128,6 +128,7 @@ class UserController {
     user.username = userData.username
     user.email = userData.email
     user.password = userData.password
+    user.telephonenumber = userData.telephonenumber
 
     yield user.save()
 
