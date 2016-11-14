@@ -6,6 +6,10 @@ const Car = use('App/Model/Car')
 const User = use('App/Model/User')
 const Validator = use('Validator')
 
+//$('input[type="checkbox"]').change(function(){
+//    this.value = (Number(this.checked));
+//});
+
 class CarController {
   * createCar(request, response) {
     const categories = yield Category.all();
@@ -17,12 +21,13 @@ class CarController {
 
   * doCreateCar(request, response) {
     const carData = request.except('_csrf');
+    console.log(carData)
     const rules = {
       brand: 'required',
       model: 'required',
       year: 'required',
       price: 'required',
-      category: 'required',
+      category_id: 'required',
       km: 'required',
       description: 'required',
     }
@@ -37,8 +42,35 @@ class CarController {
       return
     }
 
+
+
     carData.car_id = request.currentUser.id
     yield Car.create(carData);
+    //document.getElementById('messageCheckbox').checked;
+    const id = request.param('id')
+    const car = yield Car.find(id)
+
+    /*const aut = document.getElementById('messageCheckbox').checked
+    console.log("---------------------------------------------")
+    console.log(document.getElementById('messageCheckbox').checked)
+    console.log("---------------------------------------------")
+    const alu = document.getElementById('messageCheckbox').checked
+    const cli = document.getElementById('messageCheckbox').checked
+    const dra = document.getElementById('messageCheckbox').checked
+    const tem = document.getElementById('messageCheckbox').checked
+    const ser = document.getElementById('messageCheckbox').checked*/
+
+    
+
+    car.automatictransmission = document.getElementById('automatictransmission').checked
+    car.alu = document.getElementById('alu').checked
+    car.climate = document.getElementById('climate').checked
+    car.drawbar = document.getElementById('drawbar').checked
+    car.tempomat = document.getElementById('tempomat').checked
+    car.servicebook = document.getElementById('servicebook').checked
+
+    yield car.save()
+    
 
     response.redirect('/');
   }
@@ -101,6 +133,12 @@ class CarController {
       response.unauthorized()
       return
     }
+
+    //document.getElementById('messageCheckbox').checked;
+
+    /*$('input[type="checkbox"]').change(function(){
+    this.value = (Number(this.checked));
+});*/
 
     recipe.name = recipeData.name
     recipe.ingredients = recipeData.ingredients
