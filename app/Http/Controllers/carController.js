@@ -47,20 +47,8 @@ class CarController {
     carData.car_id = request.currentUser.id
     yield Car.create(carData);
     //document.getElementById('messageCheckbox').checked;
-    const id = request.param('id')
-    const car = yield Car.find(id)
-
-    /*const aut = document.getElementById('messageCheckbox').checked
-    console.log("---------------------------------------------")
-    console.log(document.getElementById('messageCheckbox').checked)
-    console.log("---------------------------------------------")
-    const alu = document.getElementById('messageCheckbox').checked
-    const cli = document.getElementById('messageCheckbox').checked
-    const dra = document.getElementById('messageCheckbox').checked
-    const tem = document.getElementById('messageCheckbox').checked
-    const ser = document.getElementById('messageCheckbox').checked*/
-
-    
+    /*const id = request.param('id')
+    const car = yield Car.find(id)    
 
     car.automatictransmission = document.getElementById('automatictransmission').checked
     car.alu = document.getElementById('alu').checked
@@ -69,7 +57,7 @@ class CarController {
     car.tempomat = document.getElementById('tempomat').checked
     car.servicebook = document.getElementById('servicebook').checked
 
-    yield car.save()
+    yield car.save()*/
     
 
     response.redirect('/');
@@ -77,45 +65,48 @@ class CarController {
 
   * show(request, response) {
     const id = request.param('id')
-    const recipe = yield Recipe.find(id)
-    if (!recipe) {
-      response.notFound('Recipe does not exist')
+    const car = yield Car.find(id)
+    if (!car) {
+      response.notFound('Car does not exist')
       return
     }
-    yield recipe.related('category').load()
-    yield response.sendView('showRecipe', {
-      recipe: recipe.toJSON()
+    yield car.related('category').load()
+    yield response.sendView('showCar', {
+      car: car.toJSON()
     })
   }
 
   * edit(request, response) {
     const id = request.param('id')
-    const recipe = yield Recipe.find(id)
+    const car = yield Car.find(id)
 
-    if (request.currentUser.id !== recipe.user_id) {
+    if (request.currentUser.id !== car.car_id) {
       response.unauthorized('Nincs jog')
       return
     }
 
     const categories = yield Category.all();
 
-    console.log(recipe.toJSON())
+    console.log(car.toJSON())
 
-    yield response.sendView('editRecipe', {
+    yield response.sendView('editCar', {
       categories: categories.toJSON(),
-      recipe: recipe.toJSON(),
+      car: car.toJSON(),
     });
   }
 
   * doEdit(request, response) {
-    const recipeData = request.except('_csrf');
+    const carData = request.except('_csrf');
     const rules = {
-      name: 'required',
-      ingredients: 'required',
-      instructions: 'required',
-      category_id: 'required'
+      brand: 'required',
+      model: 'required',
+      year: 'required',
+      price: 'required',
+      category_id: 'required',
+      km: 'required',
+      description: 'required',
     }
-    const validation = yield Validator.validateAll(recipeData, rules);
+    const validation = yield Validator.validateAll(carData, rules);
     if (validation.fails()) {
       yield request
         .withAll()
@@ -127,10 +118,10 @@ class CarController {
     }
 
     const id = request.param('id')
-    const recipe = yield Recipe.find(id)
+    const car = yield Car.find(id)
 
-    if (request.currentUser.id !== recipe.user_id) {
-      response.unauthorized()
+    if (request.currentUser.id !== car.car_id) {
+      response.unauthorized('Nincs jog!')
       return
     }
 
@@ -140,12 +131,24 @@ class CarController {
     this.value = (Number(this.checked));
 });*/
 
-    recipe.name = recipeData.name
-    recipe.ingredients = recipeData.ingredients
-    recipe.instructions = recipeData.instructions
-    recipe.category_id = recipeData.category_id
+    car.brand = carData.brand
+    car.model = carData.model
+    car.year = carData.year
+    car.price = carData.price
+    car.category_id = carData.category_id
+    car.condition = carData.condition
+    car.fuel = carData.fuel
+    car.km = carData.km
+    car.enginecapacity = carData.enginecapacity
+    car.autotransmission = carData.autotransmission
+    car.alu = carData.alu
+    car.climate = carData.climate
+    car.drawbar = carData.drawbar
+    car.tempomat = carData.tempomat
+    car.servicebook = carData.servicebook
+    car.description = carData.description
 
-    yield recipe.save()
+    yield car.save()
 
     response.redirect('/');
   }

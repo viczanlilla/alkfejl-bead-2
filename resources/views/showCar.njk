@@ -1,0 +1,32 @@
+{% extends 'layout' %}
+
+{% block content %}
+
+<h2>{{ car.brand }} {{ car.model}} </h2>
+<p>{{ car.category.name }}</p>
+<hr>
+<h3>Ár: {{ car.price }} Ft</h3>
+<h4>Évjárat: {{ car.year }}</h4>
+<h4>Állapot: {{ car.condition }}</h4>
+<h4>Üzemanyag: {{ car.fuel }}</h4>
+<h4>Megtett km: {{ car.km }} km</h4>
+<h4>Hengerűrtartalom: {{ car.enginecapacity }} cm3</h4>
+<hr>
+<h4>Automata váltó: {% if 1==car.automatictransmission %} van {% else %} nincs {% endif %} </h4>
+<h4>Alufelni: {% if 1==car.alu %} van {% else %} nincs {% endif %}</h4>
+<h4>Klíma: {% if 1==car.climate %} van {% else %} nincs {% endif %}</h4>
+<h4>Vonóhorog: {% if 1==car.drawbar %} van {% else %} nincs {% endif %}</h4>
+<h4>Tempomat: {% if 1==car.tempomat %} van {% else %} nincs {% endif %}</h4>
+<h4>Szervízkönyv: {% if 1==car.servicebook %} van {% else %} nincs {% endif %}</h4>
+<hr>
+<h4>Leírás</h4>
+<pre>
+{{ car.description }}
+</pre>
+
+{% if currentUser.id == car.car_id %}
+<a class="btn btn-primary" href="/cars/{{car.id}}/edit" role="button">Szerkeszt</a>
+<a class="btn btn-danger" href="/cars/{{car.id}}/delete" role="button">Töröl</a>
+{% endif %}
+
+{% endblock %}

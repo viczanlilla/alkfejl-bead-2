@@ -28,7 +28,7 @@
     <label for="brand" class="col-lg-2 control-label">Márka</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="brand" name="brand" placeholder="Pl.: BMW"
-        value="{{ old('brand') }}">
+        value="{{ car.brand }}">
     </div>
   </div>
 
@@ -36,7 +36,7 @@
     <label for="model" class="col-lg-2 control-label">Modell</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="model" name="model" placeholder="Pl.: X6"
-        value="{{ old('model') }}">
+        value="{{ car.model }}">
     </div>
   </div>
 
@@ -44,7 +44,7 @@
     <label for="year" class="col-lg-2 control-label">Év</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="year" name="year" placeholder="Pl.: 2016"
-        value="{{ old('year') }}">
+        value="{{ car.year }}">
     </div>
   </div>
 
@@ -52,7 +52,7 @@
     <label for="price" class="col-lg-2 control-label">Ár</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="price" name="price" placeholder="Pl.: 30 000 000"
-        value="{{ old('price') }}">
+        value="{{ car.price }}">
     </div>
   </div>
 
@@ -62,7 +62,7 @@
       <select class="form-control" id="category_id" name="category_id">
         {% for category in categories %}
         <option value="{{ category.id }}"
-          {% if category.id == old('category_id') %}
+          {% if category.id == car.category_id %}
           selected
           {% endif %}
         >
@@ -77,7 +77,7 @@
     <label for="condition" class="col-lg-2 control-label">Állapot</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="condition" name="condition" placeholder="Pl.: Új"
-        value="{{ old('condition') }}">
+        value="{{ car.condition }}">
     </div>
   </div>
 
@@ -85,7 +85,7 @@
     <label for="fuel" class="col-lg-2 control-label">Üzemanyag</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="fuel" name="fuel" placeholder="Pl.: Benzin"
-        value="{{ old('fuel') }}">
+        value="{{ car.fuel }}">
     </div>
   </div>
 
@@ -93,7 +93,7 @@
     <label for="km" class="col-lg-2 control-label">Megtett km</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="km" name="km" placeholder="Pl.: 50 000"
-        value="{{ old('km') }}">
+        value="{{ car.km }}">
     </div>
   </div>
 
@@ -101,44 +101,44 @@
     <label for="enginecapacity" class="col-lg-2 control-label">Hengerűrtartalom</label>
     <div class="col-lg-10">
       <input type="text" class="form-control" id="enginecapacity" name="enginecapacity" placeholder="Pl.: 4395"
-        value="{{ old('enginecapacity') }}">
+        value="{{ car.enginecapacity }}">
     </div>
   </div>
 
       <div class="col-lg-12 col-md-offset-2">
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="automatictransmission" name="automatictransmission" value="1" >Automata váltó</label>
+      <label><input type="checkbox" id="automatictransmission" name="automatictransmission" value="1" {% if car.automatictransmission==1 %} checked="checked" {% endif %} >Automata váltó</label>
     </div>
   </div>
 
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="alu" name="alu" value="1">Alufelni</label>
+      <label><input type="checkbox" id="alu" name="alu" value="1" {% if car.alu==1 %} checked="checked" {% endif %}>Alufelni</label>
     </div>
   </div>
   
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="climate" name="climate" value="1">Klíma</label>
+      <label><input type="checkbox" id="climate" name="climate" value="1" {% if car.climate==1 %} checked="checked" {% endif %}>Klíma</label>
     </div>
   </div>
   
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="drawbar" name="drawbar" value="1">Vonóhorog</label>
+      <label><input type="checkbox" id="drawbar" name="drawbar" value="1" {% if car.drawbar==1 %} checked="checked" {% endif %}>Vonóhorog</label>
     </div>
   </div>
   
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="tempomat" name="tempomat" value="1">Tempomat</label>
+      <label><input type="checkbox" id="tempomat" name="tempomat" value="1" {% if car.tempomat==1 %} checked="checked" {% endif %}>Tempomat</label>
     </div>
   </div>
   
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="servicebook" name="servicebook" value="1">Szervízkönyv</label>
+      <label><input type="checkbox" id="servicebook" name="servicebook" value="1" {% if car.servicebook==1 %} checked="checked" {% endif %}>Szervízkönyv</label>
     </div>
   </div>
 
@@ -149,7 +149,7 @@
   <div class="form-group">
     <label for="description" class="col-lg-2 control-label">Leírás</label>
     <div class="col-lg-10">
-      <textarea class="form-control" rows="3" id="description" name="description"></textarea>
+      <textarea class="form-control" rows="3" id="description" name="description">{{ car.description }}</textarea>
     </div>
   </div>
 

@@ -15,15 +15,13 @@ Route.post('/login', 'UserController.doLogin')
 Route.get('/logout', 'UserController.doLogout')
 Route.get('/editUser', 'UserController.editUser').middleware('auth')
 Route.post('/editUser', 'UserController.doEdit').middleware('auth')
-
-
 Route.get('/cars/createCar', 'CarController.createCar').middleware('auth')
 Route.post('/cars/createCar', 'CarController.doCreateCar').middleware('auth')
+Route.get('/cars/:id', 'CarController.show')
 
+Route.get('/cars/:id/edit', 'CarController.edit').middleware('auth')
+Route.post('/cars/:id/edit', 'CarController.doEdit').middleware('auth')
 
-Route.get('/ads/:id', 'RecipeController.show')
-Route.get('/ads/:id/edit', 'RecipeController.edit').middleware('auth')
-Route.post('/ads/:id/edit', 'RecipeController.doEdit').middleware('auth')
 Route.get('/ads/:id/delete', 'RecipeController.doDelete').middleware('auth')
 // Route.delete('/recipes/:id', 'RecipeController.doDelete')
 Route.get('/recipes', 'RecipeController.search')
