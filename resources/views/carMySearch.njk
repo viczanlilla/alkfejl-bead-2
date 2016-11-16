@@ -1,0 +1,42 @@
+{% extends 'layout' %}
+
+{% block title %}Hirdetéseim{% endblock %}
+{% block content %}
+  <h1>Hirdetéseim</h1>
+
+
+  <h2>Találatok ({{ cars.total }})</h2>
+  {% for carBatch in cars.data | batch(9) %}
+  <div class="row">
+    {% for car in carBatch %}
+    <div class="col-md-4">
+      <a class="result-item" href="/cars/{{ car.id }}">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <strong>{{ car.brand }} {{ car.model}}</strong><br>
+            <em>{{ car.price }} Ft</em>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  Nincs a szűrésnek megfelelő autó.
+  {% endfor %}
+  {% if cars.lastPage > 1 %}
+  <div class="text-center">
+    <ul class="pagination">
+      {% for page in range(1, cars.lastPage + 1) %}
+      {% if page == cars.currentPage %}
+      <li class="active">
+        <a href="/cars?p={{ page }}&amp;carBrand={{ filters.carBrand }}&amp;category={{ filters.category }}&amp;createdBy={{ filters.createdBy }}">{{ page }}</a>
+      </li>
+      {% else %}
+      <li><a href="/cars?p={{ page }}&amp;carBrand={{ filters.carBrand }}&amp;category={{ filters.category }}&amp;createdBy={{ filters.createdBy }}">{{ page }}</a></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+{% endblock %}

@@ -42,23 +42,8 @@ class CarController {
       return
     }
 
-
-
     carData.car_id = request.currentUser.id
     yield Car.create(carData);
-    //document.getElementById('messageCheckbox').checked;
-    /*const id = request.param('id')
-    const car = yield Car.find(id)    
-
-    car.automatictransmission = document.getElementById('automatictransmission').checked
-    car.alu = document.getElementById('alu').checked
-    car.climate = document.getElementById('climate').checked
-    car.drawbar = document.getElementById('drawbar').checked
-    car.tempomat = document.getElementById('tempomat').checked
-    car.servicebook = document.getElementById('servicebook').checked
-
-    yield car.save()*/
-    
 
     response.redirect('/');
   }
@@ -125,13 +110,7 @@ class CarController {
       return
     }
 
-    //document.getElementById('messageCheckbox').checked;
-
-    /*$('input[type="checkbox"]').change(function(){
-    this.value = (Number(this.checked));
-});*/
-
-    car.brand = carData.brand
+    car.brand = carData.brand 
     car.model = carData.model
     car.year = carData.year
     car.price = carData.price
@@ -139,13 +118,13 @@ class CarController {
     car.condition = carData.condition
     car.fuel = carData.fuel
     car.km = carData.km
-    car.enginecapacity = carData.enginecapacity
-    car.autotransmission = carData.autotransmission
-    car.alu = carData.alu
-    car.climate = carData.climate
-    car.drawbar = carData.drawbar
-    car.tempomat = carData.tempomat
-    car.servicebook = carData.servicebook
+    car.enginecapacity = carData.enginecapacity 
+    car.automatictransmission = carData.automatictransmission instanceof Array ? carData.automatictransmission[0] : carData.automatictransmission
+    car.alu = carData.alu instanceof Array ? carData.alu[0] : carData.alu
+    car.climate = carData.climate instanceof Array ? carData.climate[0] : carData.climate
+    car.drawbar = carData.drawbar instanceof Array ? carData.drawbar[0] : carData.drawbar
+    car.tempomat = carData.tempomat instanceof Array ? carData.tempomat[0] : carData.tempomat
+    car.servicebook = carData.servicebook instanceof Array ? carData.servicebook[0] : carData.servicebook
     car.description = carData.description
 
     yield car.save()
@@ -155,37 +134,94 @@ class CarController {
 
   * doDelete(request, response) {
     const id = request.param('id')
-    const recipe = yield Recipe.find(id)
-    if (!recipe) {
-      response.notFound('Recipe does not exist')
+    const car = yield Car.find(id)
+    if (!car) {
+      response.notFound('Car does not exist')
       return
     }
-    yield recipe.delete()
+    yield car.delete()
     response.redirect('/');
   }
 
   * search (request, response) {
+    //const carData = request.except('_csrf');
     const page = Math.max(1, request.input('p'))
     const filters = {
-      recipeName: request.input('recipeName') || '',
+      carBrand: request.input('carBrand') || '',
+      carModel: request.input('carModel') || '',
+      carFuel: request.input('carFuel') || '',
+      carCondition: request.input('carCondition') || '',
+      carPrice1: request.input('carPrice1') || '',
+      carPrice2: request.input('carPrice2') || '',
+      carYear1: request.input('carYear1') || '',
+      carYear2: request.input('carYear2') || '',
+      carEnginecapacity1: request.input('carEnginecapacity1') || '',
+      carEnginecapacity2: request.input('carEnginecapacity2') || '',
+      carKm1: request.input('carKm1') || '',
+      carKm2: request.input('carKm2') || '',
       category: request.input('category') || 0,
-      createdBy: request.input('createdBy') || 0
+      createdBy: request.input('createdBy') || 0,
+      carAutomatictransmission: request.input('carAutomatictransmission') || null,
+      carAlu: request.input('carAlu') || null,
+      carClimate: request.input('carClimate') || null,
+      carDrawbar: request.input('carDrawbar') || null,
+      carTempomat: request.input('carTempomat') || null,
+      carServicebook: request.input('carServicebook') || null
     }
 
-    const recipes = yield Recipe.query()
+    const cars = yield Car.query()
       .where(function () {
         if (filters.category > 0) this.where('category_id', filters.category)
-        if (filters.createdBy > 0) this.where('user_id', filters.createdBy)
-        if (filters.recipeName.length > 0) this.where('name', 'LIKE', `%${filters.recipeName}%`)
+        if (filters.createdBy > 0) this.where('car_id', filters.createdBy)
+        if (filters.carBrand.length > 0) this.where('brand', 'LIKE', `%${filters.carBrand}%`)
+        if (filters.carModel.length > 0) this.where('model', 'LIKE', `%${filters.carModel}%`)
+        if (filters.carFuel.length > 0) this.where('fuel', 'LIKE', `%${filters.carFuel}%`)
+        if (filters.carCondition.length > 0) this.where('condition', 'LIKE', `%${filters.carCondition}%`)
+        if (filters.carPrice1.length > 0)this.where('price', '>=', `${filters.carPrice1}`)
+        if (filters.carPrice2.length > 0)this.where('price', '<=', `${filters.carPrice2}`)
+        if (filters.carYear1.length > 0)this.where('year', '>=', `${filters.carYear1}`)
+        if (filters.carYear2.length > 0)this.where('year', '<=', `${filters.carYear2}`)
+        if (filters.carFuel.length > 0) this.where('fuel', 'LIKE', `%${filters.carFuel}%`)
+        if (filters.carEnginecapacity1.length > 0)this.where('enginecapacity', '>=', `${filters.carEnginecapacity1}`)
+        if (filters.carEnginecapacity2.length > 0)this.where('enginecapacity', '<=', `${filters.carEnginecapacity2}`)
+        if (filters.carKm1.length > 0)this.where('km', '>=', `${filters.carKm1}`)
+        if (filters.carKm2.length > 0)this.where('km', '<=', `${filters.carKm2}`)
+        console.log('SSSSSSSSSSSSS'+filters.carAutomatictransmission)
+        if (filters.carAutomatictransmission)this.where('automatictransmission', '==', `1`)
+        
       })
       .with('user')
-      .paginate(page, 9)
+      .paginate(page, 30)
 
     const categories = yield Category.all()
     const users = yield User.all()
 
-    yield response.sendView('recipeSearch', {
-      recipes: recipes.toJSON(),
+    yield response.sendView('carSearch', {
+      cars: cars.toJSON(),
+      categories: categories.toJSON(),
+      users: users.toJSON(),
+      filters
+    })
+  }
+  
+  * mysearch (request, response) {
+    const page = Math.max(1, request.input('p'))
+    const filters = {
+      createdBy: request.currentUser.id
+    }
+
+    const cars = yield Car.query()
+      .where(function () {
+        if (filters.createdBy > 0) this.where('car_id', filters.createdBy)        
+      })
+      .with('user')
+      .paginate(page, 30)
+
+    const categories = yield Category.all()
+    const users = yield User.all()
+
+    yield response.sendView('carMySearch', {
+      cars: cars.toJSON(),
       categories: categories.toJSON(),
       users: users.toJSON(),
       filters

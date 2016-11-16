@@ -1,0 +1,215 @@
+{% extends 'layout' %}
+
+{% block title %}Autók böngészése{% endblock %}
+{% block content %}
+  <h1>Autók böngészése</h1>
+  <form action="/cars" method="GET">
+
+    <div class="row">
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputCarBrand">Márka</label>
+          <input type="text" class="form-control" placeholder="Autó márkája" id="inputCarBrand" name="carBrand" value="{{ filters.carBrand }}">
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputCarModel">Modell</label>
+          <input type="text" class="form-control" placeholder="Autó modellje" id="inputCarModel" name="carModel" value="{{ filters.carModel }}">
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputCarFuel">Üzemanyag</label>
+          <input type="text" class="form-control" id="inputCarFuel" name="carFuel" value="{{ filters.carFuel }}">
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputCarCondition">Állapot</label>
+          <input type="text" class="form-control" id="inputCarCondition" name="carCondition" value="{{ filters.carCondition }}">
+        </div>
+      </div>
+
+
+    </div>
+    <div class="row">
+
+        
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputCarYear1">Év</label>
+          <input type="text" class="form-control" id="inputCarYear1" name="carYear1" value="{{ filters.carYear1 }}">-
+          <input type="text" class="form-control" id="inputCarYear2" name="carYear2" value="{{ filters.carYear2 }}">
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputCarPrice1">Ár</label>
+          <input type="text" class="form-control"  id="inputCarPrice1" name="carPrice1" value="{{ filters.carPrice1 }}">-
+          <input type="text" class="form-control"  id="inputCarPrice2" name="carPrice2" value="{{ filters.carPrice2 }}">
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputCarEnginecapacity1">Hengerűrtartalom</label>
+          <input type="text" class="form-control" id="inputCarEnginecapacity1" name="carEnginecapacity1" value="{{ filters.carEnginecapacity1 }}">-
+          <input type="text" class="form-control" id="inputCarEnginecapacity2" name="carEnginecapacity2" value="{{ filters.carEnginecapacity2 }}">
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputCarKm1">km</label>
+          <input type="text" class="form-control"  id="inputCarKm1" name="carKm1" value="{{ filters.carKm1 }}">-
+          <input type="text" class="form-control"  id="inputCarKm2" name="carKm2" value="{{ filters.carKm2 }}">
+        </div>
+      </div>
+
+    </div>
+    <div class="row">
+
+  <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputCategory">Kategória</label>
+          <select class="form-control" id="inputCategory" name="category">
+            <option value="">--</option>
+            {% for category in categories %}
+            {% if filters.category == category.id %}
+            <option value="{{ category.id }}" selected>{{ category.name }}</option>
+            {% else %}
+            <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="inputCreatedBy">Beküldte</label>
+          <select class="form-control" id="inputCreatedBy" name="createdBy">
+            <option value="">--</option>
+            {% for user in users %}
+            {% if filters.createdBy == user.id %}
+            <option value="{{ user.id }}" selected>{{ user.username }}</option>
+            {% else %}
+            <option value="{{ user.id }}">{{ user.username }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+  </div>
+  <div class="row">
+
+      <div class="col-md-3">
+  <div class="form-group">
+    <div class="checkbox">
+      <label><input type="checkbox" id="inputCarAutomatictransmission" name="inputCarAutomatictransmission" value="1" >Automata váltó</label>
+    </div>
+    </div>
+  </div>
+
+  <div class="col-md-3">
+  <div class="form-group">
+    <div class="checkbox">
+      <label><input type="checkbox" id="inputCarAlu" name="inputCarAlu" value="1">Alufelni</label>
+    </div>
+  </div>
+  </div>
+
+  
+  <div class="col-md-3">
+  <div class="form-group">
+    <div class="checkbox">
+      <label><input type="checkbox" id="inputCarClimate" name="inputCarClimate" value="1">Klíma</label>
+    </div>
+  </div>
+  </div>
+  
+  <div class="col-md-3">
+  <div class="form-group">
+    <div class="checkbox">
+      <label><input type="checkbox" id="inputCarDrawbar" name="inputCarDrawbar" value="1">Vonóhorog</label>
+    </div>
+  </div>
+  </div>
+  
+  <div class="col-md-3">
+  <div class="form-group">
+    <div class="checkbox">
+      <label><input type="checkbox" id="inputCarTempomat" name="inputCarTempomat" value="1">Tempomat</label>
+    </div>
+  </div>
+  </div>
+  
+  <div class="col-md-3">
+  <div class="form-group">
+    <div class="checkbox">
+      <label><input type="checkbox" id="inputCarServicebook" name="inputCarServicebook" value="1">Szervízkönyv</label>
+    </div>
+  </div>
+  </div>
+
+  
+  
+      
+      
+      
+
+    </div>
+    <div class="row">
+
+    <div class="col-md-3">
+        <div class="form-group">
+          <label>&nbsp;</label>
+          <button class="btn btn-block btn-primary" type="submit">Szűrés</button>
+        </div>
+      </div>
+      </div>
+
+  </form>
+
+  <h2>Találatok ({{ cars.total }})</h2>
+  {% for carBatch in cars.data | batch(9) %}
+  <div class="row">
+    {% for car in carBatch %}
+    <div class="col-md-4">
+      <a class="result-item" href="/cars/{{ car.id }}">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <strong>{{ car.brand }} {{ car.model}}</strong><br>
+            <em>{{ car.price }} Ft</em>
+          </div>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  Nincs a szűrésnek megfelelő autó.
+  {% endfor %}
+  {% if cars.lastPage > 1 %}
+  <div class="text-center">
+    <ul class="pagination">
+      {% for page in range(1, cars.lastPage + 1) %}
+      {% if page == cars.currentPage %}
+      <li class="active">
+        <a href="/cars?p={{ page }}&amp;carBrand={{ filters.carBrand }}&amp;category={{ filters.category }}&amp;createdBy={{ filters.createdBy }}">{{ page }}</a>
+      </li>
+      {% else %}
+      <li><a href="/cars?p={{ page }}&amp;carBrand={{ filters.carBrand }}&amp;category={{ filters.category }}&amp;createdBy={{ filters.createdBy }}">{{ page }}</a></li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+{% endblock %}

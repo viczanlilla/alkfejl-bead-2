@@ -21,8 +21,10 @@ Route.get('/cars/:id', 'CarController.show')
 
 Route.get('/cars/:id/edit', 'CarController.edit').middleware('auth')
 Route.post('/cars/:id/edit', 'CarController.doEdit').middleware('auth')
+Route.get('/cars/:id/delete', 'CarController.doDelete').middleware('auth')
+Route.get('/cars', 'CarController.search')
+Route.get('/mycars', 'CarController.mysearch').middleware('auth')
 
-Route.get('/ads/:id/delete', 'RecipeController.doDelete').middleware('auth')
 // Route.delete('/recipes/:id', 'RecipeController.doDelete')
 Route.get('/recipes', 'RecipeController.search')
 
