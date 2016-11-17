@@ -19,6 +19,8 @@ Route.get('/cars/createCar', 'CarController.createCar').middleware('auth')
 Route.post('/cars/createCar', 'CarController.doCreateCar').middleware('auth')
 Route.get('/cars/:id', 'CarController.show')
 
+Route.get('/cars/:id/like', 'CarController.like')
+
 Route.get('/cars/:id/edit', 'CarController.edit').middleware('auth')
 Route.post('/cars/:id/edit', 'CarController.doEdit').middleware('auth')
 Route.get('/cars/:id/delete', 'CarController.doDelete').middleware('auth')

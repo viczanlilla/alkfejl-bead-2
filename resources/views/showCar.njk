@@ -4,6 +4,10 @@
 
 <h2>{{ car.brand }} {{ car.model}} </h2>
 <p>{{ car.category.name }}</p>
+{% if currentUser != null %}
+<a class="btn btn-primary" href="/cars/{{car.id}}/like" role="button">Tetszik</a>
+<p>Ennyi felhasználónak tetszett az autó: {{ like.total }}</p>
+{% endif %}
 <hr>
 <h3>Ár: {{ car.price }} Ft</h3>
 <h4>Évjárat: {{ car.year }}</h4>
@@ -27,6 +31,7 @@
 {% if currentUser.id == car.car_id %}
 <a class="btn btn-primary" href="/cars/{{car.id}}/edit" role="button">Szerkeszt</a>
 <a class="btn btn-danger" href="/cars/{{car.id}}/delete" role="button">Töröl</a>
+
 {% endif %}
 
 {% endblock %}

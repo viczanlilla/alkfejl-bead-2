@@ -3,6 +3,7 @@
 const Database = use('Database')
 const Category = use('App/Model/Category')
 const Car = use('App/Model/Car')
+const Like = use('App/Model/Like')
 const User = use('App/Model/User')
 const Validator = use('Validator')
 
@@ -58,6 +59,30 @@ class CarController {
     yield car.related('category').load()
     yield response.sendView('showCar', {
       car: car.toJSON()
+    })
+  }
+
+  * like(request, response) {
+    const id = request.param('id')
+    const car = yield Car.find(id)
+    const user = request.currentUser.id
+    const likeData = {                                                                                                                                                                                          
+        user_id: user,                                                                                                                                                                                 
+        car_id: id }
+    if (!car) {
+      response.notFound('Car does not exist')
+      return
+    }
+    //likeData.user_id = user
+    //likeData.car_id = id
+
+    yield Like.create(likeData); 
+    const likes = yield Like.all()
+
+    yield car.related('category').load()
+    yield response.sendView('showCar', {
+      car: car.toJSON(),
+      likes: likes.toJSON(),
     })
   }
 
@@ -187,7 +212,12 @@ class CarController {
         if (filters.carKm1.length > 0)this.where('km', '>=', `${filters.carKm1}`)
         if (filters.carKm2.length > 0)this.where('km', '<=', `${filters.carKm2}`)
         console.log('SSSSSSSSSSSSS'+filters.carAutomatictransmission)
-        if (filters.carAutomatictransmission)this.where('automatictransmission', '==', `1`)
+        if (filters.carAutomatictransmission)this.where('automatictransmission', '=', `1`)
+        if (filters.carAlu)this.where('alu', '=', `1`)
+        if (filters.carClimate)this.where('climate', '=', `1`)
+        if (filters.carDrawbar)this.where('drawbar', '=', `1`)
+        if (filters.carTempomat)this.where('tempomat', '=', `1`)
+        if (filters.carServicebook)this.where('servicebook', '=', `1`)
         
       })
       .with('user')

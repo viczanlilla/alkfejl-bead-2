@@ -113,7 +113,7 @@
       <div class="col-md-3">
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="inputCarAutomatictransmission" name="inputCarAutomatictransmission" value="1" >Automata váltó</label>
+      <label><input type="checkbox" id="inputCarAutomatictransmission" name="carAutomatictransmission" value="1" {% if filters.carAutomatictransmission == '1' %} checked {% endif %} >Automata váltó</label>
     </div>
     </div>
   </div>
@@ -121,7 +121,7 @@
   <div class="col-md-3">
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="inputCarAlu" name="inputCarAlu" value="1">Alufelni</label>
+      <label><input type="checkbox" id="inputCarAlu" name="carAlu" value="1" {% if filters.carAlu == '1' %} checked {% endif %} >Alufelni</label>
     </div>
   </div>
   </div>
@@ -130,7 +130,7 @@
   <div class="col-md-3">
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="inputCarClimate" name="inputCarClimate" value="1">Klíma</label>
+      <label><input type="checkbox" id="inputCarClimate" name="carClimate" value="1" {% if filters.carClimate == '1' %} checked {% endif %}>Klíma</label>
     </div>
   </div>
   </div>
@@ -138,7 +138,7 @@
   <div class="col-md-3">
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="inputCarDrawbar" name="inputCarDrawbar" value="1">Vonóhorog</label>
+      <label><input type="checkbox" id="inputCarDrawbar" name="carDrawbar" value="1" {% if filters.carDrawbar == '1' %} checked {% endif %}>Vonóhorog</label>
     </div>
   </div>
   </div>
@@ -146,7 +146,7 @@
   <div class="col-md-3">
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="inputCarTempomat" name="inputCarTempomat" value="1">Tempomat</label>
+      <label><input type="checkbox" id="inputCarTempomat" name="carTempomat" value="1" {% if filters.carTempomat == '1' %} checked {% endif %}>Tempomat</label>
     </div>
   </div>
   </div>
@@ -154,7 +154,7 @@
   <div class="col-md-3">
   <div class="form-group">
     <div class="checkbox">
-      <label><input type="checkbox" id="inputCarServicebook" name="inputCarServicebook" value="1">Szervízkönyv</label>
+      <label><input type="checkbox" id="inputCarServicebook" name="carServicebook" value="1" {% if filters.carServicebook == '1' %} checked {% endif %}>Szervízkönyv</label>
     </div>
   </div>
   </div>

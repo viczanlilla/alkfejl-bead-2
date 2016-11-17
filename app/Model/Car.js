@@ -10,6 +10,14 @@ class Car extends Lucid {
   user () {
     return this.belongsTo('App/Model/User')
   }
+
+  users () {
+    return this.hasMany('App/Model/User')
+  }
+
+  likes () {
+    return this.hasMany('App/Model/Like')
+  }
 }
 
 module.exports = Car
