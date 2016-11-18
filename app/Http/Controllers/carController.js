@@ -49,7 +49,7 @@ class CarController {
     response.redirect('/');
   }
 
-  * show(request, response) {
+  /** show(request, response) {
     const id = request.param('id')
     const car = yield Car.find(id)
     if (!car) {
@@ -60,9 +60,9 @@ class CarController {
     yield response.sendView('showCar', {
       car: car.toJSON()
     })
-  }
+  }*/
 
-  * like(request, response) {
+  * show(request, response) {
     const id = request.param('id')
     const car = yield Car.find(id)
     const user = request.currentUser.id
@@ -75,14 +75,27 @@ class CarController {
     }
     //likeData.user_id = user
     //likeData.car_id = id
+    yield Like.create(likeData); //elmentve db-be a Like
+    //const likes = yield Like.all()
+    //todo: megszámolni a car_id értéke hányszor szerepel a tábla car_id oszlopában, átadni a viewnak
 
-    yield Like.create(likeData); 
-    const likes = yield Like.all()
+    const filters = {
+      car_id: id
+	  }
 
+    const likes = yield Like.query()
+      .where(function () {
+        //console.log('SSSSSSSSSSSSSSSSSS'+filters.car_id)
+        //if (filters.car_id)this.where('car_id', '=', `${filters.car_id}`)
+        if (id)this.where('car_id', '=', `${id}`)
+      })
+
+      console.log('SSSSSSSSSSSSSSSSSS'+likes.toJSON)
     yield car.related('category').load()
     yield response.sendView('showCar', {
       car: car.toJSON(),
       likes: likes.toJSON(),
+      filters
     })
   }
 
@@ -211,7 +224,7 @@ class CarController {
         if (filters.carEnginecapacity2.length > 0)this.where('enginecapacity', '<=', `${filters.carEnginecapacity2}`)
         if (filters.carKm1.length > 0)this.where('km', '>=', `${filters.carKm1}`)
         if (filters.carKm2.length > 0)this.where('km', '<=', `${filters.carKm2}`)
-        console.log('SSSSSSSSSSSSS'+filters.carAutomatictransmission)
+        //console.log('SSSSSSSSSSSSS'+filters.carAutomatictransmission)
         if (filters.carAutomatictransmission)this.where('automatictransmission', '=', `1`)
         if (filters.carAlu)this.where('alu', '=', `1`)
         if (filters.carClimate)this.where('climate', '=', `1`)
