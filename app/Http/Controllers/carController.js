@@ -49,7 +49,7 @@ class CarController {
     response.redirect('/');
   }
 
-  /** show(request, response) {
+  * show(request, response) {
     const id = request.param('id')
     const car = yield Car.find(id)
     if (!car) {
@@ -60,9 +60,10 @@ class CarController {
     yield response.sendView('showCar', {
       car: car.toJSON()
     })
-  }*/
+  }
 
-  * show(request, response) {
+  * like(request, response) {
+     const page = Math.max(1, request.input('p'))
     const id = request.param('id')
     const car = yield Car.find(id)
     const user = request.currentUser.id
@@ -80,7 +81,8 @@ class CarController {
     //todo: megszámolni a car_id értéke hányszor szerepel a tábla car_id oszlopában, átadni a viewnak
 
     const filters = {
-      car_id: id
+      car_id: id,
+      first_like: true
 	  }
 
     const likes = yield Like.query()
@@ -88,7 +90,12 @@ class CarController {
         //console.log('SSSSSSSSSSSSSSSSSS'+filters.car_id)
         //if (filters.car_id)this.where('car_id', '=', `${filters.car_id}`)
         if (id)this.where('car_id', '=', `${id}`)
+        if (first_like){
+          this.where('car_id', '=', `${id}`)
+        }
       })
+      .with('user')
+      .paginate(page, 30)
 
       console.log('SSSSSSSSSSSSSSSSSS'+likes.toJSON)
     yield car.related('category').load()
