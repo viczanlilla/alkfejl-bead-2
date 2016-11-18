@@ -3,7 +3,7 @@
 {% block title %}Hirdetéseim{% endblock %}
 {% block content %}
   <h1>Hirdetéseim</h1>
-
+<a class="btn btn-primary" href="/cars/createCar" role="button">Új hirdetés feladása</a>
 
   <h2>Találatok ({{ cars.total }})</h2>
   {% for carBatch in cars.data | batch(9) %}

@@ -7,10 +7,6 @@ const Like = use('App/Model/Like')
 const User = use('App/Model/User')
 const Validator = use('Validator')
 
-//$('input[type="checkbox"]').change(function(){
-//    this.value = (Number(this.checked));
-//});
-
 class CarController {
   * createCar(request, response) {
     const categories = yield Category.all();

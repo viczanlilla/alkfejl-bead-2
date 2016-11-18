@@ -115,15 +115,8 @@ class UserController {
       return
     }
 
-    //const id = request.param('id')
     const user = request.currentUser
-
-    /*if (request.currentUser.id !== recipe.user_id) {
-      response.unauthorized()
-      return
-    }*/
-
-    
+  
     user.firstname = userData.firstname
     user.lastname = userData.lastname
     user.username = userData.username
