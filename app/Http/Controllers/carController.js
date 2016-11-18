@@ -63,6 +63,20 @@ class CarController {
   }*/
 
   * show(request, response) {
+
+    if(!request.currentUser){
+      const id = request.param('id')
+    const car = yield Car.find(id)
+    if (!car) {
+      response.notFound('Car does not exist')
+      return
+    }
+    yield car.related('category').load()
+    yield response.sendView('showCar', {
+      car: car.toJSON()
+    })
+    return
+    }
      const page = Math.max(1, request.input('p'))
     const id = request.param('id')
     const car = yield Car.find(id)
@@ -95,9 +109,9 @@ class CarController {
 
       //ha az isLiked-nak nincs eleme, akkor mentsük a like-ot, egyébként ne
       console.log("BBBBlengthBBBBB"+isLiked.length )
-      if( isLiked.length < 1){
+      if( isLiked.length > 0){
         //yield Like.create(likeData); //elmentve db-be a Like--> most ne mentsük el hisz ez csak egy show
-        //first_like = false; //ez a felhasznalo, ezt az autot mar like-olta
+        first_like = false; //ez a felhasznalo, ezt az autot mar like-olta
       }
       //console.log("BBBBBBBBBBBBBBBBB"+isLiked)
 
@@ -116,14 +130,30 @@ class CarController {
       likes: likes.toJSON(),
       first_like
     })
+    
     //response.redirect('/cars/'+`${id}`);
   }
 
   * like(request, response) {
+    if(!request.currentUser){
+      const id = request.param('id')
+    const car = yield Car.find(id)
+    if (!car) {
+      response.notFound('Car does not exist')
+      return
+    }
+    yield car.related('category').load()
+    yield response.sendView('showCar', {
+      car: car.toJSON()
+    })
+    return
+    }
      const page = Math.max(1, request.input('p'))
     const id = request.param('id')
     const car = yield Car.find(id)
+    
     const user = request.currentUser.id
+    
     var first_like = true
     const likeData = {                                                                                                                                                                                          
         user_id: user,                                                                                                                                                                                 
@@ -173,6 +203,7 @@ class CarController {
       likes: likes.toJSON(),
       first_like
     })
+    //response.redirect('/cars/'+id)
     //response.redirect('/cars/'+`${id}`);
   }
 

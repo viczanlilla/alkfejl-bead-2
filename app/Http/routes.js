@@ -2,11 +2,6 @@
 
 const Route = use('Route')
 
-// Route.on('/').render('welcome')
-// Route.on('/').render('main')
-// Route.get('/', function * (request, response) {
-//     yield response.sendView('main');
-// });
 Route.get('/', 'IndexController.index')
 Route.get('/register', 'UserController.register')
 Route.post('/register', 'UserController.doRegister')
@@ -18,24 +13,13 @@ Route.post('/editUser', 'UserController.doEdit').middleware('auth')
 Route.get('/cars/createCar', 'CarController.createCar').middleware('auth')
 Route.post('/cars/createCar', 'CarController.doCreateCar').middleware('auth')
 Route.get('/cars/:id', 'CarController.show')
-
-Route.get('/cars/:id/like', 'CarController.like')
-
+Route.get('/cars/:id/like', 'CarController.like').middleware('auth')
 Route.get('/cars/:id/edit', 'CarController.edit').middleware('auth')
 Route.post('/cars/:id/edit', 'CarController.doEdit').middleware('auth')
 Route.get('/cars/:id/delete', 'CarController.doDelete').middleware('auth')
 Route.get('/cars', 'CarController.search')
 Route.get('/mycars', 'CarController.mysearch').middleware('auth')
 
-// Route.delete('/recipes/:id', 'RecipeController.doDelete')
-Route.get('/recipes', 'RecipeController.search')
-
-Route.get('/recipes/create', 'RecipeController.create').middleware('auth')
-Route.post('/recipes/create', 'RecipeController.doCreate').middleware('auth')
-Route.get('/recipes/:id', 'RecipeController.show')
-Route.get('/recipes/:id/edit', 'RecipeController.edit').middleware('auth')
-Route.post('/recipes/:id/edit', 'RecipeController.doEdit').middleware('auth')
-Route.get('/recipes/:id/delete', 'RecipeController.doDelete').middleware('auth')
 
 
 
