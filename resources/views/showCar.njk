@@ -5,7 +5,9 @@
 <h2>{{ car.brand }} {{ car.model}} </h2>
 <p>{{ car.category.name }}</p>
 {% if currentUser != null %}
-<a class="btn btn-primary" href="/cars/{{car.id}}/like" role="button">Tetszik</a>
+{% if first_like %}
+<a type="submit" class="btn btn-primary" href="/cars/{{car.id}}/like" role="button">Tetszik</a>
+{% endif %}
 <p>Ennyi felhasználónak tetszett az autó: {{ likes.total }}</p>
 {% endif %}
 <hr>

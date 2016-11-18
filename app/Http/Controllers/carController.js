@@ -49,7 +49,7 @@ class CarController {
     response.redirect('/');
   }
 
-  * show(request, response) {
+  /* show(request, response) {
     const id = request.param('id')
     const car = yield Car.find(id)
     if (!car) {
@@ -60,13 +60,14 @@ class CarController {
     yield response.sendView('showCar', {
       car: car.toJSON()
     })
-  }
+  }*/
 
-  * like(request, response) {
+  * show(request, response) {
      const page = Math.max(1, request.input('p'))
     const id = request.param('id')
     const car = yield Car.find(id)
     const user = request.currentUser.id
+    var first_like = true
     const likeData = {                                                                                                                                                                                          
         user_id: user,                                                                                                                                                                                 
         car_id: id }
@@ -74,36 +75,105 @@ class CarController {
       response.notFound('Car does not exist')
       return
     }
-    //likeData.user_id = user
-    //likeData.car_id = id
-    yield Like.create(likeData); //elmentve db-be a Like
-    //const likes = yield Like.all()
     //todo: megszámolni a car_id értéke hányszor szerepel a tábla car_id oszlopában, átadni a viewnak
-
     const filters = {
       car_id: id,
-      first_like: true
+      user_id: user,
 	  }
-
-    const likes = yield Like.query()
+    //kigyűjtöm hányszor like-olta a jelenlegi felhasználó, a jelenlegi autót:
+    const isLiked = yield Like.query()
       .where(function () {
-        //console.log('SSSSSSSSSSSSSSSSSS'+filters.car_id)
-        //if (filters.car_id)this.where('car_id', '=', `${filters.car_id}`)
-        if (id)this.where('car_id', '=', `${id}`)
-        if (first_like){
+        if (id){
           this.where('car_id', '=', `${id}`)
         }
+        if (user){
+          this.where('user_id', '=', `${user}`)
+        }
+      })
+      .with('user')
+      
+
+      //ha az isLiked-nak nincs eleme, akkor mentsük a like-ot, egyébként ne
+      console.log("BBBBlengthBBBBB"+isLiked.length )
+      if( isLiked.length < 1){
+        //yield Like.create(likeData); //elmentve db-be a Like--> most ne mentsük el hisz ez csak egy show
+        //first_like = false; //ez a felhasznalo, ezt az autot mar like-olta
+      }
+      //console.log("BBBBBBBBBBBBBBBBB"+isLiked)
+
+      //gyűjtsük ki hány Like-ot kapott a jelenlegi autó:
+      const likes = yield Like.query()
+      .where(function () {
+         if (id)this.where('car_id', '=', `${id}`)
       })
       .with('user')
       .paginate(page, 30)
 
-      console.log('SSSSSSSSSSSSSSSSSS'+likes.toJSON)
+
     yield car.related('category').load()
     yield response.sendView('showCar', {
       car: car.toJSON(),
       likes: likes.toJSON(),
-      filters
+      first_like
     })
+    //response.redirect('/cars/'+`${id}`);
+  }
+
+  * like(request, response) {
+     const page = Math.max(1, request.input('p'))
+    const id = request.param('id')
+    const car = yield Car.find(id)
+    const user = request.currentUser.id
+    var first_like = true
+    const likeData = {                                                                                                                                                                                          
+        user_id: user,                                                                                                                                                                                 
+        car_id: id }
+    if (!car) {
+      response.notFound('Car does not exist')
+      return
+    }
+    //todo: megszámolni a car_id értéke hányszor szerepel a tábla car_id oszlopában, átadni a viewnak
+    const filters = {
+      car_id: id,
+      user_id: user,
+	  }
+    //kigyűjtöm hányszor like-olta a jelenlegi felhasználó, a jelenlegi autót:
+    const isLiked = yield Like.query()
+      .where(function () {
+        if (id){
+          this.where('car_id', '=', `${id}`)
+        }
+        if (user){
+          this.where('user_id', '=', `${user}`)
+        }
+      })
+      .with('user')
+      
+
+      //ha az isLiked-nak nincs eleme, akkor mentsük a like-ot, egyébként ne
+      console.log("BBBBlengthBBBBB"+isLiked.length )
+      if( isLiked.length < 1){
+        yield Like.create(likeData); //elmentve db-be a Like
+        first_like = false; //ez a felhasznalo, ezt az autot mar like-olta
+      }
+      //console.log("BBBBBBBBBBBBBBBBB"+isLiked)
+
+      //gyűjtsük ki hány Like-ot kapott a jelenlegi autó:
+      const likes = yield Like.query()
+      .where(function () {
+         if (id)this.where('car_id', '=', `${id}`)
+      })
+      .with('user')
+      .paginate(page, 30)
+
+
+    yield car.related('category').load()
+    yield response.sendView('showCar', {
+      car: car.toJSON(),
+      likes: likes.toJSON(),
+      first_like
+    })
+    //response.redirect('/cars/'+`${id}`);
   }
 
   * edit(request, response) {
