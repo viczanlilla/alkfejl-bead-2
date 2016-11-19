@@ -99,8 +99,8 @@ class UserController {
   * doEdit(request, response) {
     const userData = request.except('_csrf');
     const rules = {
-      username: 'required|alpha_numeric|unique:users',
-      email: 'required|email|unique:users',
+      username: 'required|alpha_numeric',
+      email: 'required|email',
       password: 'required|min:4',
       password_confirm: 'required|same:password',
     }
@@ -115,7 +115,9 @@ class UserController {
       return
     }
 
-    const user = request.currentUser
+    const id = request.currentUser.id
+    const user = yield User.find(id)
+    //const user = request.currentUser
   
     user.firstname = userData.firstname
     user.lastname = userData.lastname
