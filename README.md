@@ -5,9 +5,8 @@ FELADAT
 	
 KÖVETELMÉNYEK
 - Funkcionális követelmények
-	- Vendégként szeretnék a hirdetések között szabadon böngészni.
+	- Vendégként szeretnék a hirdetések között szabadon böngészni, eladó autót keresni.
 	- Vendégként szeretném egy autó leírását megtekinteni.
-	- Vendégként szeretnék eladó autót keresni.
 	- Vendégként szeretnék tudni regisztrálni az oldalra.
 	- Felhasználóként szeretnék tudni bejelentkezni az oldalra.
 	- Felhasználóként szeretném tudni a profiladataimat szerkeszteni.
@@ -59,14 +58,21 @@ OLDALTÉRKÉP
 		
 VÉGPONTOK
 - GET /: főoldal
+- GET /register: regisztrációs oldal
+- POST /register: regisztrációs oldal felküldése
 - GET /login: bejelentkező oldal
 - POST /login: bejelentkezési adatok felküldése
-- GET /profil: profiladatok
-- GET /ads: hirdetések listája
-- GET /ads/:id: hirdetés megtekintése
-- POST /ads/:id: hirdetés like-olása
-- GET /ads/create: új hirdetés felvitele, űrlap megjelenítése
-- POST /ads/create: új hirdetés felvitele, adatok küldése
+- GET /logout: kijelentkező oldal
+- GET /editUser: felhasználói adatok szerkesztése
+- POST /editUser: felhasználói adatok szerkesztésének felküldése
+- GET /cars/createCar: új hirdetés felvitele, űrlap megjelenítése
+- POST /cars/createCar: új hirdetés felvitele, adatok küldése
+- GET /cars/:id: hirdetés megtekintése, lehetőség like-olásra
+- GET /cars: hirdetésekre való keresés
+- GET /cars/:id/edit: hirdetés szerkesztése
+- POST /cars/:id/edit: hirdetésekre szerkesztésének felküldése
+- GET /cars/:id/delete: hirdetés törlése
+- GET /mycars: hirdetéseim megtekintése
 
 OLDALVÁZLATOK
 
