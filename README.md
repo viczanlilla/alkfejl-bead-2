@@ -89,3 +89,4 @@ ADATMODELL
 ![Alt text](/bead1_images/ADATMODELL.png?raw=true "ADATMODELL.png")
 
 Szerkesztette: Viczián Lilla
+asdf
