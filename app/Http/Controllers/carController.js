@@ -375,6 +375,18 @@ class CarController {
     })
   }
 
+  
+  *ajaxDelete(request, response) {
+    const id = request.param('id')
+    const car = yield Car.find(id)
+    if (!car) {
+      response.notFound('Hiba történt a feldolgozás során!')
+      return
+    }
+    yield car.delete()
+    response.ok({success: true});
+  }
+
 }
 
 module.exports = CarController

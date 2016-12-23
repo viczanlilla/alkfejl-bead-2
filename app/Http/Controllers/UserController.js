@@ -131,6 +131,24 @@ class UserController {
     response.redirect('/');
   }
 
+  * ajaxLogin (request, response) {
+    const email = request.input('email')
+    const password = request.input('password')
+
+    try {
+      const login = yield request.auth.attempt(email, password) 
+
+      if (login) {
+        response.ok({ success: true })
+        return
+      }
+    }
+    catch (err) {
+      response.ok({ success: false })
+      return
+    }
+  }
+
 }
 
 module.exports = UserController
