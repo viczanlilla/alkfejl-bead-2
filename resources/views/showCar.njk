@@ -35,6 +35,7 @@
 </pre>
 
 {% if currentUser.id == car.car_id %}
+{{ csrfField | safe }}
 <a class="btn btn-primary" href="/cars/{{car.id}}/edit" role="button">Szerkeszt</a>
 <a id="btnDelete" class="btn btn-danger" href="/cars/{{car.id}}/delete" role="button">Töröl</a>
 
@@ -47,7 +48,7 @@
             Biztosan törölni szeretnéd?
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-success modal-ok" data-dismiss="modal">OK</button>
+            <button type="button" class="btn btn-primary modal-ok" data-dismiss="modal"> OK</button>
             <button type="button" class="btn btn-danger modal-cancel" data-dismiss="modal">Mégse</button>
         </div>
         </div>

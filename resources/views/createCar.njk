@@ -1,5 +1,9 @@
 {% extends 'layout' %}
 
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+{% endblock %}
+
 {% block content %}
 
 
@@ -20,39 +24,47 @@
 </div>
 {% endif %}
 
-<form class="form-horizontal" action="" method="post">
+<form class="form-horizontal" action="" method="post" data-toggle="validator">
 
   {{ csrfField }}
 
-  <div class="form-group">
+  <div class="form-group has-feedback">
     <label for="brand" class="col-lg-2 control-label">Márka</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="brand" name="brand" placeholder="Pl.: BMW"
+      <input required type="text" class="form-control" id="brand" name="brand" placeholder="Pl.: BMW"
         value="{{ old('brand') }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group has-feedback">
     <label for="model" class="col-lg-2 control-label">Modell</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="model" name="model" placeholder="Pl.: X6"
+      <input required type="text" class="form-control" id="model" name="model" placeholder="Pl.: X6"
         value="{{ old('model') }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group has-feedback">
     <label for="year" class="col-lg-2 control-label">Év</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="year" name="year" placeholder="Pl.: 2016"
+      <input required type="text" class="form-control" id="year" name="year" placeholder="Pl.: 2016"
         value="{{ old('year') }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group has-feedback">
     <label for="price" class="col-lg-2 control-label">Ár</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="price" name="price" placeholder="Pl.: 30000000"
+      <input required type="text" class="form-control" id="price" name="price" placeholder="Pl.: 30000000"
         value="{{ old('price') }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
@@ -73,35 +85,43 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group has-feedback">
     <label for="condition" class="col-lg-2 control-label">Állapot</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="condition" name="condition" placeholder="Pl.: Új"
+      <input required type="text" class="form-control" id="condition" name="condition" placeholder="Pl.: Új"
         value="{{ old('condition') }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group has-feedback">
     <label for="fuel" class="col-lg-2 control-label">Üzemanyag</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="fuel" name="fuel" placeholder="Pl.: Benzin"
+      <input required type="text" class="form-control" id="fuel" name="fuel" placeholder="Pl.: Benzin"
         value="{{ old('fuel') }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group has-feedback">
     <label for="km" class="col-lg-2 control-label">Megtett km</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="km" name="km" placeholder="Pl.: 50000"
+      <input required type="text" class="form-control" id="km" name="km" placeholder="Pl.: 50000"
         value="{{ old('km') }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group has-feedback">
     <label for="enginecapacity" class="col-lg-2 control-label">Hengerűrtartalom</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="enginecapacity" name="enginecapacity" placeholder="Pl.: 4395"
+      <input required type="text" class="form-control" id="enginecapacity" name="enginecapacity" placeholder="Pl.: 4395"
         value="{{ old('enginecapacity') }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
@@ -146,10 +166,12 @@
 <br>
   
 
-  <div class="form-group">
+  <div class="form-group has-feedback">
     <label for="description" class="col-lg-2 control-label">Leírás</label>
     <div class="col-lg-10">
-      <textarea class="form-control" rows="3" id="description" name="description"></textarea>
+      <textarea required class="form-control" rows="3" id="description" name="description"></textarea>
+      <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
