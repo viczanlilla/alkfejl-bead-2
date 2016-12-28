@@ -88,10 +88,26 @@ ADATMODELL
 
 ![Alt text](/bead1_images/ADATMODELL.png?raw=true "ADATMODELL.png")
 
+----
+Felhasználói dokumentáció
 
+A webes alkalmazás összes funkciójának futtatásához szükséges egy tetszőleges operációs rendszeren lévő böngésző, és javascript. 
+
+Program használata
+	- Böngészőben nyissuk meg a főoldalt
+	- Jobb felső sarokban kattintsunk a Bejelentkezés feliratra
+	- Bejelentkezés/Regisztráció után a főoldalra jutunk
+	- Hirdetéseim/Új hirdetés feladása menüpontnál tudunk új hirdetést feladni
+	- Töltsük ki az űrlapot
+	- Hibás adatok esetén az űrlap jelezni fogja a hibát
+	- Kész! gombra kattintva mentsük el az adatokat
+	- Hirdetéseim menüpont alatt a hirdetések megtekinthetőek, szerkeszthetőek és törölhetőek egyesével
+	- Bejelentkezett felhasználó jobb felső sarokban látja az "Adataim" gombot, amelyre kattintva szerkesztheti profilját
+	- Bal felső sarokban Autók böngészése gombra kattintva tetszőleges tulajdonságokat megadva tudunk böngészni az autók között
+	- Az így kapott eredmények között kiválaszthatunk egyet, amelyet megtekinthetünk, like-olhatun
 
 ----
-- a funkcióban érintett fájlok mind kliens- és szerveroldalon:
+- A funkcióban érintett fájlok mind kliens- és szerveroldalon:
 	- public/script/delete.js (hirdetés törlésére szolgáló js)
 	- public/script/popup_login.js (bejelentkezés modalhoz js)
 	- public/script/popup_registration.js (regisztrációs modalhoz js)
@@ -104,13 +120,17 @@ ADATMODELL
 	- resources/views/showCar.njk 
 	- ../Controllers/carController.js (ajaxDelete fgv)
 	- ../Controllers/UserController.js (ajaxLogin, ajaxRegister fgv)
+	- ../routes.js
 
-- az 5 funkció kliensoldali JavaScript segítségével
+- Az 5 funkció kliensoldali JavaScript segítségével
 	- /cars/:id URL-en, a felhasználó (Ajax-szal) törölheti létező hirdetéseit
 	- a kezdőlapról és a /cars URL-ről a Bejelentkezés gombra kattintva egy modal segíti a bejelentkezést (Ajax)
 	- a kezdőlapról és a /cars URL-ről a Regisztráció gombra kattintva egy modal segíti a regisztrálást (Ajax)
 	- /cars/createCar URL-en, a js ellenőrzi, hogy üres mezőkkel ne lehessen hirdetést feladni
 	- /register URL-en, a js ellenőrzi, hogy az űrlap csak helyesen kitöltve kerülhessen leadásra
+
+Szekvencia diagram (hirdetés törlése)
+	![Alt text](/bead1_images/szekvencia.jpg?raw=true "szekvencia.jpg")
 
 - Selenium IDE telepítése (Firefoxban)
 	- https://addons.mozilla.org/hu/firefox/addon/selenium-ide/ plugin telepítése
@@ -121,5 +141,11 @@ ADATMODELL
 	- a felugró ablakban tudunk már megírt teszteket újra futtatni:
 		- Fájl/Open/"kiválasztjuk a megfelelő tesztet"/
 		- kiválasztás után "Play entire test suite" gombra kattintva újra és újra le játszhatóak a teszteket
-	
+
+- Tesztesetek
+	- Regisztrált felhasználóként való bejelentkezés (test/bejelentkezés.html)
+	- Bejelentkezett felhasználó módosítja az adatait (test/bejelentkezve, adataim változtatása.html)
+	- Bejelentkezett felhasználó hirdetést ad fel (test/bejelentkezve, hidetés feladása.html)
+	- Vendég vagy bejelentkezett felhasználó rákeres az "Audi" kulcsszóra és megtekinti az első ilyen hidetést (test/hirdetések közt Audi keresése, és megtekintése.html)
+
 Szerkesztette: Viczián Lilla
