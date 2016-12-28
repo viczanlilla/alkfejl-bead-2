@@ -88,5 +88,29 @@ ADATMODELL
 
 ![Alt text](/bead1_images/ADATMODELL.png?raw=true "ADATMODELL.png")
 
+
+
+----
+- a funkcióban érintett fájlok mind kliens- és szerveroldalon:
+	- public/script/delete.js (hirdetés törlésére szolgáló js)
+	- public/script/popup_login.js (bejelentkezés modalhoz js)
+	- public/script/popup_registration.js (regisztrációs modalhoz js)
+	- resources/views/carSearch.njk
+	- resources/views/createCar.njk (input mezők validálásához szüks. módosítások)
+	- resources/views/index.njk
+	- resources/views/layout.njk
+	- resources/views/login.njk
+	- resources/views/register.njk (input mezők validálásához szüks. módosítások)
+	- resources/views/showCar.njk 
+	- ../Controllers/carController.js (ajaxDelete fgv)
+	- ../Controllers/UserController.js (ajaxLogin, ajaxRegister fgv)
+
+- az 5 funkció kliensoldali JavaScript segítségével
+	- /cars/:id URL-en, a felhasználó (Ajax-szal) törölheti létező hirdetéseit
+	- a kezdőlapról és a /cars URL-ről a Bejelentkezés gombra kattintva egy modal segíti a bejelentkezést (Ajax)
+	- a kezdőlapról és a /cars URL-ről a Regisztráció gombra kattintva egy modal segíti a regisztrálást (Ajax)
+	- /cars/createCar URL-en, a js ellenőrzi, hogy üres mezőkkel ne lehessen hirdetést feladni
+	- /register URL-en, a js ellenőrzi, hogy az űrlap csak helyesen kitöltve kerülhessen leadásra
+
+	
 Szerkesztette: Viczián Lilla
-asdf
