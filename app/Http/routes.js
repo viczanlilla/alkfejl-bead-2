@@ -24,6 +24,7 @@ Route.get('/mycars', 'CarController.mysearch').middleware('auth')
 Route.group('ajax', function () {
   Route.delete('/cars/:id/delete', 'CarController.ajaxDelete').middleware('auth')
   Route.post('/login', 'UserController.ajaxLogin')
+  Route.post('/register', 'UserController.ajaxRegister')
 }).prefix('/ajax')
 
 
