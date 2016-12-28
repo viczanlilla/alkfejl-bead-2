@@ -91,9 +91,10 @@ ADATMODELL
 ----
 Felhasználói dokumentáció
 
-A webes alkalmazás összes funkciójának futtatásához szükséges egy tetszőleges operációs rendszeren lévő böngésző, és javascript. 
+- A webes alkalmazás összes funkciójának futtatásához szükséges egy tetszőleges operációs rendszeren lévő böngésző, és javascript. 
 
-Program használata
+- Program használata
+
 	- Böngészőben nyissuk meg a főoldalt
 	- Jobb felső sarokban kattintsunk a Bejelentkezés feliratra
 	- Bejelentkezés/Regisztráció után a főoldalra jutunk
@@ -130,7 +131,7 @@ Program használata
 	- /register URL-en, a js ellenőrzi, hogy az űrlap csak helyesen kitöltve kerülhessen leadásra
 
 Szekvencia diagram (hirdetés törlése)
-	![Alt text](/bead1_images/szekvencia.jpg?raw=true "szekvencia.jpg")
+	![Alt text](/bead1_images/szekvencia.png?raw=true "szekvencia.png")
 
 - Selenium IDE telepítése (Firefoxban)
 	- https://addons.mozilla.org/hu/firefox/addon/selenium-ide/ plugin telepítése
