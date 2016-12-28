@@ -112,5 +112,14 @@ ADATMODELL
 	- /cars/createCar URL-en, a js ellenőrzi, hogy üres mezőkkel ne lehessen hirdetést feladni
 	- /register URL-en, a js ellenőrzi, hogy az űrlap csak helyesen kitöltve kerülhessen leadásra
 
+- Selenium IDE telepítése (Firefoxban)
+	- https://addons.mozilla.org/hu/firefox/addon/selenium-ide/ plugin telepítése
+
+- Selenium IDE
+	- Eszközök/Selenium IDE
+	- a felugró ablakban tudunk új teszteket készíteni (piros gomb lenyomása után végezzük el azt az utasítássorozatot, amit teszt formájában viszont szeretnénk látni.)
+	- a felugró ablakban tudunk már megírt teszteket újra futtatni:
+		- Fájl/Open/"kiválasztjuk a megfelelő tesztet"/
+		- kiválasztás után "Play entire test suite" gombra kattintva újra és újra le játszhatóak a teszteket
 	
 Szerkesztette: Viczián Lilla
