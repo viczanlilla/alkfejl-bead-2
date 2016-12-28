@@ -89,7 +89,7 @@ ADATMODELL
 ![Alt text](/bead1_images/ADATMODELL.png?raw=true "ADATMODELL.png")
 
 ----
-Felhasználói dokumentáció
+FELHASZNÁLÓI DOKUMENTÁCIÓ
 
 - A webes alkalmazás összes funkciójának futtatásához szükséges egy tetszőleges operációs rendszeren lévő böngésző, és javascript. 
 
@@ -108,7 +108,8 @@ Felhasználói dokumentáció
 	- Az így kapott eredmények között kiválaszthatunk egyet, amelyet megtekinthetünk, like-olhatun
 
 ----
-- A funkcióban érintett fájlok mind kliens- és szerveroldalon:
+A FUNKCIÓKBAN ÉRINTETT FÁJLOK MIND KLIENS- ÉS SZERVEROLDALON:
+
 	- public/script/delete.js (hirdetés törlésére szolgáló js)
 	- public/script/popup_login.js (bejelentkezés modalhoz js)
 	- public/script/popup_registration.js (regisztrációs modalhoz js)
@@ -123,27 +124,32 @@ Felhasználói dokumentáció
 	- ../Controllers/UserController.js (ajaxLogin, ajaxRegister fgv)
 	- ../routes.js
 
-- Az 5 funkció kliensoldali JavaScript segítségével
+AZ 5 FUNKCIÓ KLIENSOLDALI JavaScript SEGÍTSÉGÉVEL
+
 	- /cars/:id URL-en, a felhasználó (Ajax-szal) törölheti létező hirdetéseit
 	- a kezdőlapról és a /cars URL-ről a Bejelentkezés gombra kattintva egy modal segíti a bejelentkezést (Ajax)
 	- a kezdőlapról és a /cars URL-ről a Regisztráció gombra kattintva egy modal segíti a regisztrálást (Ajax)
 	- /cars/createCar URL-en, a js ellenőrzi, hogy üres mezőkkel ne lehessen hirdetést feladni
 	- /register URL-en, a js ellenőrzi, hogy az űrlap csak helyesen kitöltve kerülhessen leadásra
 
-Szekvencia diagram (hirdetés törlése)
+SZEKVENCIA DIAGRAM (hirdetés törlése)
+
 	![Alt text](/bead1_images/szekvencia.png?raw=true "szekvencia.png")
 
-- Selenium IDE telepítése (Firefoxban)
+SELENIUM IDE TELEPÍTÉSE (Firefoxban)
+
 	- https://addons.mozilla.org/hu/firefox/addon/selenium-ide/ plugin telepítése
 
-- Selenium IDE
+SELENIUM IDE HASZNÁLATA
+
 	- Eszközök/Selenium IDE
 	- a felugró ablakban tudunk új teszteket készíteni (piros gomb lenyomása után végezzük el azt az utasítássorozatot, amit teszt formájában viszont szeretnénk látni.)
 	- a felugró ablakban tudunk már megírt teszteket újra futtatni:
 		- Fájl/Open/"kiválasztjuk a megfelelő tesztet"/
 		- kiválasztás után "Play entire test suite" gombra kattintva újra és újra le játszhatóak a teszteket
 
-- Tesztesetek
+TESZTESETEK
+
 	- Regisztrált felhasználóként való bejelentkezés (test/bejelentkezés.html)
 	- Bejelentkezett felhasználó módosítja az adatait (test/bejelentkezve, adataim változtatása.html)
 	- Bejelentkezett felhasználó hirdetést ad fel (test/bejelentkezve, hidetés feladása.html)
