@@ -20,6 +20,8 @@ $('#btnRegistration').on('click', function (e) {
     const $formContainer = $modal.find('.form-area')
     const $errorContainer = $modal.find('.alert').hide()
     $formContainer.load('/register form', function () {
+        $modal.on('shown.bs.modal', function (e) { $(this).find('form[data-toggle=validator]').validator('destroy');
+      $(this).find('form[data-toggle=validator]').validator() });
       $modal.modal('show')
       const $form = $modal.find('form')
       $form.on('submit', function(e) {

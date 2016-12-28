@@ -41,48 +41,60 @@ data-toggle="validator">
   <div class="form-group has-feedback">
     <label for="firstname" class="col-lg-2 control-label">Keresztnév</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Keresztnév"
+      <input required type="text" class="form-control" id="firstname" name="firstname" placeholder="Keresztnév"
         value="{{ old('firstname') }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
   <div class="form-group has-feedback">
     <label for="username" class="col-lg-2 control-label">Felhasználónév</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="username" name="username" placeholder="Felhasználónév"
+      <input required type="text" class="form-control" id="username" name="username" placeholder="Felhasználónév"
         value="{{ old('username') }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
   <div class="form-group has-feedback">
     <label for="email" class="col-lg-2 control-label">Email</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="email" name="email" placeholder="Email cím"
-        value="{{ old('email') }}">
+      <input required type="email" class="form-control" id="email" name="email" placeholder="Email cím"
+        value="{{ old('email') }}" data-error="Helyes alak: valami@valami.hu" required>
+    <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
   <div class="form-group has-feedback">
     <label for="password" class="col-lg-2 control-label">Jelszó</label>
     <div class="col-lg-10">
-      <input type="password" class="form-control" id="password" name="password" placeholder="Jelszó"
+      <input required type="password" data-minlength="4" data-error="Legalább 4 karakter szükséges!" class="form-control" id="password" name="password" placeholder="Jelszó"
         value="">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
   <div class="form-group has-feedback">
     <label for="password_confirm" class="col-lg-2 control-label">Jelszó újra</label>
     <div class="col-lg-10">
-      <input type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Jelszó megerősítése"
-        value="">
+      <input required type="password" class="form-control" id="password_confirm" name="password_confirm" placeholder="Jelszó megerősítése"
+        value="" data-match="#password" data-match-error="Nem egyezik a Jelszóval!">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
   <div class="form-group has-feedback">
     <label for="telephonenumber" class="col-lg-2 control-label">Telefonszám</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="telephonenumber" name="telephonenumber" placeholder="Telefonszám"
+      <input required type="text" class="form-control" id="telephonenumber" name="telephonenumber" placeholder="Telefonszám"
         value="{{ old('telephonenumber') }}">
+        <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <div class="help-block with-errors"></div>
     </div>
   </div>
 
