@@ -125,6 +125,7 @@ A FUNKCIÓKBAN ÉRINTETT FÁJLOK MIND KLIENS- ÉS SZERVEROLDALON
 	- ../routes.js
 
 AZ 5 FUNKCIÓ KLIENSOLDALI JavaScript SEGÍTSÉGÉVEL
+
 	- /cars/:id URL-en, a felhasználó (Ajax-szal) törölheti létező hirdetéseit
 	- a kezdőlapról és a /cars URL-ről a Bejelentkezés gombra kattintva egy modal segíti a bejelentkezést (Ajax)
 	- a kezdőlapról és a /cars URL-ről a Regisztráció gombra kattintva egy modal segíti a regisztrálást (Ajax)
@@ -132,12 +133,15 @@ AZ 5 FUNKCIÓ KLIENSOLDALI JavaScript SEGÍTSÉGÉVEL
 	- /register URL-en, a js ellenőrzi, hogy az űrlap csak helyesen kitöltve kerülhessen leadásra
 
 SZEKVENCIA DIAGRAM (hirdetés törlése)
+
 	![Alt text](/bead1_images/szekvencia.png?raw=true "szekvencia.png")
 
 SELENIUM IDE TELEPÍTÉSE (Firefoxban)
+
 	- https://addons.mozilla.org/hu/firefox/addon/selenium-ide/ plugin telepítése
 
 SELENIUM IDE HASZNÁLATA
+
 	- Eszközök/Selenium IDE
 	- a felugró ablakban tudunk új teszteket készíteni (piros gomb lenyomása után végezzük el azt az utasítássorozatot, amit teszt formájában viszont szeretnénk látni.)
 	- a felugró ablakban tudunk már megírt teszteket újra futtatni:
@@ -145,6 +149,7 @@ SELENIUM IDE HASZNÁLATA
 		- kiválasztás után "Play entire test suite" gombra kattintva újra és újra le játszhatóak a teszteket
 
 TESZTESETEK
+
 	- Regisztrált felhasználóként való bejelentkezés (test/bejelentkezés.html)
 	- Bejelentkezett felhasználó módosítja az adatait (test/bejelentkezve, adataim változtatása.html)
 	- Bejelentkezett felhasználó hirdetést ad fel (test/bejelentkezve, hidetés feladása.html)
