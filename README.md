@@ -133,7 +133,6 @@ AZ 5 FUNKCIÓ KLIENSOLDALI JavaScript SEGÍTSÉGÉVEL
 	- /register URL-en, a js ellenőrzi, hogy az űrlap csak helyesen kitöltve kerülhessen leadásra
 
 SZEKVENCIA DIAGRAM (hirdetés törlése)
-
 	![Alt text](/bead1_images/szekvencia.png?raw=true "szekvencia.png")
 
 SELENIUM IDE TELEPÍTÉSE (Firefoxban)
